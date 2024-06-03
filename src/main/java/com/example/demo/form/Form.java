@@ -8,18 +8,21 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 /**
+ * <pre>
  * 画面より入力されることを想定したクラス
+ * 型チェックも行う
+ * </pre>
  * @author Takumi
  */
 @Data
 public class Form {
 
 	@NotEmpty
-	@Pattern(regexp = "\\d")
+	@Pattern(regexp = "\\d", message = "idは数値のみ入力可能です")
 	private String id;
 	@NotEmpty
 	private String full_name;
-	@Pattern(regexp = "\\d")
+	@Pattern(regexp = "\\d", message = "insert_dateは数値のみ入力可能です")
 	private String insert_date;
 	
 	

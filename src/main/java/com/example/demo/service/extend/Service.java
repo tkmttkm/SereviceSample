@@ -31,12 +31,12 @@ public class Service extends AbstractService<Entity> {
 	public void findAll() {
 		List<Entity> list = repository.findAll();
 		setDataList(list);
-		
 	}
 	
 	@Override
 	public Entity findById(int userId) {
 		Optional<Entity> dataOpt = repository.findById(Integer.valueOf(userId));
+		//データがない場合はnullを返す
 		return dataOpt.isPresent() ? dataOpt.get() : null;
 	}
 
