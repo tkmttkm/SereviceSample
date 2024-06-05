@@ -25,9 +25,10 @@ public class Form {
 	private String full_name;
 	@Pattern(regexp = "\\d", message = "insert_dateは数値のみ入力可能です")
 	private String insert_date;
-	
-	
+
+
 	/**
+	 * 値がセットされていない場合は、
 	 * 現在日時をyyyyMMdd形式で取得
 	 * @return yyyyMMdd
 	 */
@@ -35,10 +36,10 @@ public class Form {
 		if(!StringUtils.isBlank(this.insert_date)) {
 			return this.insert_date;
 		}
-		
+
 		LocalDateTime nowDate = LocalDateTime.now();
-        DateTimeFormatter yyyyMMdd_formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        String yyyyMMdd = yyyyMMdd_formatter.format(nowDate);
-        return yyyyMMdd;
+		DateTimeFormatter yyyyMMdd_formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String yyyyMMdd = yyyyMMdd_formatter.format(nowDate);
+		return yyyyMMdd;
 	}
 }
