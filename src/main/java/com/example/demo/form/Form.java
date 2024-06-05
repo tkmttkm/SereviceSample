@@ -3,6 +3,7 @@ package com.example.demo.form;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import io.micrometer.common.util.StringUtils;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
@@ -31,6 +32,10 @@ public class Form {
 	 * @return yyyyMMdd
 	 */
 	public String getInsert_date() {
+		if(!StringUtils.isBlank(this.insert_date)) {
+			return this.insert_date;
+		}
+		
 		LocalDateTime nowDate = LocalDateTime.now();
         DateTimeFormatter yyyyMMdd_formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         String yyyyMMdd = yyyyMMdd_formatter.format(nowDate);
