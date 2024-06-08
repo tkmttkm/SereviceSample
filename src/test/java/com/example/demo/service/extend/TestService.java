@@ -22,7 +22,7 @@ class TestService {
 
 	@Autowired
 	private Service service;
-	
+
 	@BeforeEach
 	void setUp() {
 		service.setAddCount(0);
@@ -76,26 +76,30 @@ class TestService {
 		existform.setFull_name("テスト テストテストテスト");
 		existform.setInsert_date("20240603");
 		service.addUser(existform);
-		
+
 		assertEquals(service.getAddCount(), 1);
+
+		Entity data10 = service.findById(10);
+		assertEquals(data10.getFullName(), "テスト テストテストテスト");
+		assertEquals(data10.getInsert_date(), 20240603);
 	}
 
 	@Test
 	void testAddUsers() {
 		List<Form> addList = new ArrayList<>();
-		
+
 		Form addform1 = new Form();
 		addform1.setId("10");
 		addform1.setFull_name("テスト テストテストテスト");
 		addform1.setInsert_date("20240603");
 		addList.add(addform1);
-		
+
 		Form addform2 = new Form();
 		addform2.setId("11");
 		addform2.setFull_name("テスト テストテスト");
 		addform2.setInsert_date("20240607");
 		addList.add(addform2);
-		
+
 		service.addUser(addList);
 
 		Form existform = new Form();
@@ -103,10 +107,18 @@ class TestService {
 		existform.setFull_name("テスト テストテストテスト");
 		existform.setInsert_date("20240603");
 		service.addUser(existform);
-		
+
 		assertEquals(service.getAddCount(), 2);
+
+		Entity data10 = service.findById(10);
+		assertEquals(data10.getFullName(), "テスト テストテストテスト");
+		assertEquals(data10.getInsert_date(), 20240603);
+
+		Entity data11 = service.findById(11);
+		assertEquals(data11.getFullName(), "テスト テストテスト");
+		assertEquals(data11.getInsert_date(), 20240607);
 	}
-	
+
 	@Test
 	void testDeleteUser() {
 		service.deleteUser(1);
@@ -132,23 +144,23 @@ class TestService {
 		assertEquals(data.getFullName(), "編集した　名前");
 		assertEquals(data.getInsert_date(), 20240603);
 	}
-	
+
 	@Test
 	void testEditUsers() {
 		List<Form> addList = new ArrayList<>();
-		
+
 		Form editform1 = new Form();
 		editform1.setId("1");
 		editform1.setFull_name("テスト テストテストテスト");
 		editform1.setInsert_date("20240603");
 		addList.add(editform1);
-		
+
 		Form editform2 = new Form();
 		editform2.setId("2");
 		editform2.setFull_name("テスト テストテスト");
 		editform2.setInsert_date("20240607");
 		addList.add(editform2);
-		
+
 		service.editUser(addList);
 
 		Form notExistform = new Form();
@@ -156,8 +168,17 @@ class TestService {
 		notExistform.setFull_name("テスト テストテストテスト");
 		notExistform.setInsert_date("20240603");
 		service.editUser(notExistform);
-		
+
 		assertEquals(service.getEditCount(), 2);
+
+		Entity data1 = service.findById(1);
+		assertEquals(data1.getFullName(), "テスト テストテストテスト");
+		assertEquals(data1.getInsert_date(), 20240603);
+
+		Entity data2 = service.findById(2);
+		assertEquals(data2.getFullName(), "テスト テストテスト");
+		assertEquals(data2.getInsert_date(), 20240607);
+
 	}
 
 }
