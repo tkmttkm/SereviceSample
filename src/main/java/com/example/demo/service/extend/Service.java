@@ -43,6 +43,7 @@ public class Service extends AbstractService<Entity> {
 
 	@Override
 	public void addUser(Form form) {
+		//データの存在確認をする
 		if (isExist(form)) {
 			System.err.println("idが" + form.getId() + "のデータはすでに存在します。");
 		} else {
@@ -55,6 +56,7 @@ public class Service extends AbstractService<Entity> {
 	public void addUser(List<Form> formList) {
 		List<Form> existList = existList(formList);
 
+		//データの存在確認をする
 		if (existList.size() == 0) {
 			List<Entity> savedList = saveAll(formList);
 			setAddCount(getAddCount() + savedList.size());
@@ -65,6 +67,7 @@ public class Service extends AbstractService<Entity> {
 
 	@Override
 	public void deleteUser(int userId) {
+		//データの存在確認をする
 		if (isExist(userId)) {
 			Integer id = Integer.valueOf(userId);
 			repository.deleteById(id);
@@ -76,6 +79,7 @@ public class Service extends AbstractService<Entity> {
 
 	@Override
 	public void editUser(Form form) {
+		//データの存在確認をする
 		if (isExist(form)) {
 			save(form);
 			setEditCount(getEditCount() + 1);
@@ -86,6 +90,7 @@ public class Service extends AbstractService<Entity> {
 
 	@Override
 	public void editUser(List<Form> formList) {
+		//データの存在確認をする
 		if (existList(formList).size() == 0) {
 			isExistDatasErrorLog(formList, false);
 		} else {
